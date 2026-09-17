@@ -188,6 +188,7 @@ Effectuez cette opération une fois par solution manquante. Chaque importation p
 ### Documents de connaissances
 
 Les quatre PDF sont fournis avec ce lab dans [`Docs`](Docs/). Chargez-les dans deux dossiers SharePoint portant exactement les noms ci-dessous — les instructions font référence à ces noms de dossiers, et le cas d’usage nº 2 vous y conduit.
+Dans le cadre du Hackathon SSG, ils ont été chargés sur [un site SharePoint du tenant ECMSSG](https://ecmssg.sharepoint.com/sites/km-copilotstudio).
 
 | Document | Dossier SharePoint | Utilisation par l’agent |
 |----------|-------------------|-----------------------------|
