@@ -1,51 +1,13 @@
 ---
-layout: lab
-module: mcs-knowledge-sources
-title: "Sources de connaissances, connaissances générales de l'IA et instructions personnalisées"
-order: 30
 duration: 60
 difficulty: 200
-lab_type: local
-section: core_labs
-journeys: ["maker"]
-bootcamp_order: "3"
 description: "Connecter un agent Copilot Studio à des sites web, des fichiers, Dataverse, SharePoint et un connecteur Graph, puis contrôler ses réponses avec des instructions personnalisées."
 ---
 
-# Sources de connaissances, connaissances générales de l'IA et instructions personnalisées
+# Base de connaissances et instructions personnalisées
 
-Un agent ne vaut que par ce qu'il sait. Dans ce lab, vous branchez un agent Copilot Studio sur des sources publiques et internes, vous observez comment il cite ses sources, puis vous reprenez la main sur le style et le périmètre de ses réponses.
+Dans ce lab, vous branchez un agent Copilot Studio sur des sources publiques et internes, vous observez comment il cite ses sources, puis vous reprenez la main sur le style et le périmètre de ses réponses.
 
----
-
-## 🧭 Détails du lab
-
-| Niveau | Profil | Durée | Objectif |
-| ----- | ------- | -------- | ------- |
-| 200 | Créateur (maker) | 60 minutes | À l'issue de ce lab, les participants sauront connecter un agent à plusieurs types de sources de connaissances, piloter le nœud de réponses génératives et écrire des instructions personnalisées efficaces. |
-
----
-
-## 📚 Table des matières
-
-- [Pourquoi c'est important](#pourquoi-c-est-important)
-- [Introduction](#introduction)
-- [Vue d'ensemble des concepts fondamentaux](#concepts-fondamentaux)
-- [Documentation et liens de formation complémentaires](#documentation-et-formation)
-- [Prérequis](#prerequis)
-- [Récapitulatif des objectifs](#recapitulatif-des-objectifs)
-- [Cas d'usage abordés](#cas-d-usage-abordes)
-- [Instructions par cas d'usage](#instructions-par-cas-d-usage)
-  - [Cas d'usage nº 1 : sources publiques, sites web et fichiers](#cas-1-sources-publiques)
-  - [Cas d'usage nº 2 : sources internes, Dataverse, SharePoint et connecteur Graph](#cas-2-sources-internes)
-  - [Cas d'usage nº 3 : instructions personnalisées](#cas-3-instructions-personnalisees)
-  - [Cas d'usage nº 4 : connaissances générales et pilotage du nœud](#cas-4-connaissances-generales)
-- [Synthèse des apprentissages](#synthese-des-apprentissages)
-- [Conclusions et recommandations](#conclusions-et-recommandations)
-
----
-
-<a id="pourquoi-c-est-important"></a>
 ## 🤔 Pourquoi c'est important
 
 **Créateurs d'agents et équipes métier** , vous avez un agent qui répond bien aux questions que vous avez anticipées, et mal à toutes les autres. Écrire un sujet par question n'est pas une stratégie tenable : les utilisateurs posent des questions que personne n'avait prévues, et ils les posent avec leurs mots.
@@ -61,12 +23,9 @@ Les sources de connaissances renversent le problème. Plutôt que d'écrire les 
 
 **À associer à :** module « Generative answers et sources de connaissances » du parcours Copilot Studio.
 
----
-
-<a id="introduction"></a>
 ## 🌐 Introduction
 
-Vous travaillez pour Contoso. L'agent de support interne existe déjà, mais il ne sait rien : il ne connaît ni la documentation produit publiée sur le web, ni les référentiels de conformité, ni les clients stockés dans Dataverse, ni les pages RH de SharePoint, ni la base de connaissances ServiceNow de l'équipe IT.
+L'agent de support interne existe déjà, mais il ne sait rien : il ne connaît ni la documentation produit publiée sur le web, ni les référentiels de conformité, ni les clients stockés dans Dataverse, ni les pages RH de SharePoint, ni la base de connaissances ServiceNow de l'équipe IT.
 
 Vous allez lui donner accès à ces cinq mondes, un par un, en observant à chaque fois ce qui change dans ses réponses et dans ses citations. Puis vous allez lui imposer un style, avant de décider explicitement s'il a le droit, ou non, de puiser dans ses propres connaissances générales.
 
@@ -78,14 +37,11 @@ Vous allez lui donner accès à ces cinq mondes, un par un, en observant à chaq
 - Activer ou désactiver les connaissances générales de l'IA et en mesurer l'effet.
 - Restreindre, dans un nœud donné, les sources interrogées.
 
----
-
-<a id="concepts-fondamentaux"></a>
 ## 🎓 Vue d'ensemble des concepts fondamentaux
 
 | Concept | Pourquoi c'est important |
 |---------|----------------|
-| **Source de connaissances** | Contenu que l'agent est autorisé à consulter pour fonder ses réponses. Sans source, l'agent ne peut que réciter ses connaissances générales ou déclarer qu'il ne sait pas. |
+| **Source/Base de connaissances** | Contenu que l'agent est autorisé à consulter pour fonder ses réponses. Sans source, l'agent ne peut que réciter ses connaissances générales ou déclarer qu'il ne sait pas. |
 | **Réponses génératives** | Le mécanisme qui interroge les sources, synthétise et cite. C'est lui qui produit la réponse, pas un sujet écrit à la main. |
 | **Sujet Conversational boosting** | Le point de chute des phrases qui ne déclenchent aucun sujet, en orchestration classique. Il contient déjà un nœud de réponses génératives préconfiguré. |
 | **Orchestration classique et orchestration générative** | Deux façons de décider quoi faire d'une question. Le mode choisi change l'endroit où se règlent les instructions personnalisées : nœud dans un cas, agent dans l'autre. |
@@ -94,25 +50,20 @@ Vous allez lui donner accès à ces cinq mondes, un par un, en observant à chaq
 | **Connaissances générales de l'IA** | La capacité de l'agent à répondre hors de toute donnée d'ancrage, comme le ferait un assistant grand public. Puissante pour la couverture, risquée pour la fiabilité. |
 | **Modération du contenu** | Le curseur qui arbitre entre le volume de réponses et le risque d'interprétation abusive des données d'ancrage. |
 
----
-
-<a id="documentation-et-formation"></a>
 ## 📄 Documentation et liens de formation complémentaires
 
-* [Knowledge sources summary , Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
-* [Use prompt modification to provide custom instructions to your agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-generative-answers-prompt-modification)
-* [Orchestrate agent behavior with generative AI](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
-* [Configure high-quality instructions for generative orchestration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/generative-mode-guidance)
+* [Knowledge sources summary , Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-copilot-studio)
+* [Use prompt modification to provide custom instructions to your agent](https://learn.microsoft.com/microsoft-copilot-studio/nlu-generative-answers-prompt-modification)
+* [Orchestrate agent behavior with generative AI](https://learn.microsoft.com/microsoft-copilot-studio/advanced-generative-actions)
+* [Configure high-quality instructions for generative orchestration](https://learn.microsoft.com/microsoft-copilot-studio/guidance/generative-mode-guidance)
 
----
-
-<a id="prerequis"></a>
 ## ✅ Prérequis
 
-- Un poste avec un accès Internet.
-- Un accès au locataire fourni pour l'atelier, ou votre propre locataire d'entreprise avec une licence Copilot Studio ou un essai.
-- Un agent Copilot Studio existant, par exemple celui créé dans les labs précédents.
-- L'accès aux sites externes suivants depuis le poste : `learn.microsoft.com`, `www.microsoft.com`, `adoption.microsoft.com`.
+- Un accès au tenant de test avec une licence Copilot Studio ou un essai.
+- L'accès aux sites externes suivants depuis le poste : 
+  - `learn.microsoft.com`
+  - `www.microsoft.com`
+  - `adoption.microsoft.com`.
 
 > [!IMPORTANT]
 > Deux réglages conditionnent le début du lab :
@@ -211,7 +162,7 @@ Ajouter deux natures de sources publiques, un site web et un fichier, puis obser
 1. Sélectionnez **Add knowledge**, puis **Public websites**, et ajoutez les adresses suivantes :
 
     ```text
-    https://learn.microsoft.com/en-us/microsoft-copilot-studio/
+    https://learn.microsoft.com/microsoft-copilot-studio/
     ```
 
     ```text
