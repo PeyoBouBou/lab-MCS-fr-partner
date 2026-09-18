@@ -162,7 +162,7 @@ Vous construisez un **Copilot Studio Assistant** destiné aux équipes internes 
 
 Créer un agent Copilot Studio entièrement configuré, avec des instructions explicites, le modèle **Claude Sonnet 4.6** et une première source de connaissances publique.
 
----
+
 
 ### Instructions pas à pas
 
@@ -279,7 +279,7 @@ Votre Copilot Studio Assistant doit répondre aux questions de licences, y compr
 
 Ajouter un document comme source de connaissances, restreindre l'agent à ses seules sources, et vérifier qu'il répond à partir du contenu chargé.
 
----
+
 
 ### Instructions pas à pas
 
@@ -437,7 +437,7 @@ Votre agent doit désormais rendre deux services d'une autre nature. D'une part,
 
 Créer et configurer deux outils de nature différente : un outil basé sur un connecteur existant, et un outil d'invite personnalisée doté d'une entrée.
 
----
+
 
 ### Instructions pas à pas
 
@@ -613,7 +613,7 @@ Des utilisateurs souhaitent s'inscrire à une liste de diffusion pour recevoir l
 
 Créer une rubrique personnalisée qui traite une intention utilisateur précise, l'inscription à une liste de diffusion, avec une collecte de données structurée.
 
----
+
 
 ### Instructions pas à pas
 
@@ -755,5 +755,3 @@ Les quatre cas d'usage forment une progression : l'agent sait qui il est, puis s
 * **Éprouvez la reconnaissance des intentions avec de vraies formulations d'utilisateurs**, dans les différentes langues de vos utilisateurs, pour les outils comme pour les rubriques.
 
 En appliquant ces principes, vous construirez des agents qui ne se contentent pas de répondre mais qui agissent, s'intègrent aux systèmes de votre organisation et produisent une valeur métier mesurable.
-
----
