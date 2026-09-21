@@ -1,5 +1,5 @@
 ---
-duration: 60
+duration: 80
 difficulty: 300
 description: "Assemblez un agent sur le harness GitHub Copilot à partir de ses composants - instructions, connaissances, outils, mémoire, Skills et bac à sable de l’agent - puis observez l’orchestrateur décider, se rétablir après une erreur et expliquer ses choix."
 
@@ -15,7 +15,7 @@ Construisez un agent avec le harness GitHub Copilot à partir de ses composants,
 
 | Niveau | Profil | Durée | Objectif |
 | ----- | ------- | -------- | ------- |
-| 300 | Créateur | 60 minutes | À l’issue de ce lab, les participants sauront créer un agent sur le harness GitHub Copilot, l’ancrer dans des connaissances et le doter d’outils, lire la trace de raisonnement pour expliquer chacune de ses décisions, reconnaître comment la boucle se rétablit après l’échec d’un appel d’outil, et encapsuler une procédure reproductible dans une Skill qui ne se charge que lorsqu’elle est pertinente. |
+| 300 | Créateur | 80 minutes | À l’issue de ce lab, les participants sauront créer un agent sur le harness GitHub Copilot, l’ancrer dans des connaissances et le doter d’outils, lire la trace de raisonnement pour expliquer chacune de ses décisions, reconnaître comment la boucle se rétablit après l’échec d’un appel d’outil, encapsuler une procédure reproductible dans une Skill qui ne se charge que lorsqu’elle est pertinente, et concevoir eux-mêmes une Skill à partir d’un besoin métier. |
 
 
 
@@ -50,6 +50,7 @@ Dans le dernier cas d’usage, vous créez un deuxième agent dans un secteur to
 - Ce que fait la boucle lorsqu’un appel d’outil **échoue**, et en quoi cela diffère de l’orchestration standard
 - Quand l’orchestrateur fait appel à l’**Agent Sandbox** pour calculer plutôt qu’estimer
 - Comment une **Skill** maintient une procédure reproductible hors de vos instructions jusqu’à ce qu’elle soit nécessaire
+- Comment **concevoir vous-même une Skill** à partir d’un besoin métier et de la documentation, puis la valider par des tests de déclenchement
 
 
 
@@ -99,6 +100,7 @@ Ce sont eux que les agents appellent réellement, sans eux, les cas d’usage n�
 Les quatre contiennent des données synthétiques pour des entreprises fictives. Rien dans ces solutions ne contacte un système réel.
 
 
+
 #### Vérifier si elles sont déjà chargées
 
 Dans de nombreux tenants de formation, les quatre solutions sont déjà provisionnées avec l’environnement et il n’y a rien à faire. Vérifiez avant d’importer, importer une solution déjà présente n’est pas dangereux, mais fait perdre du temps pendant le lab.
@@ -127,6 +129,7 @@ Dans de nombreux tenants de formation, les quatre solutions sont déjà provisio
 
     > [!NOTE]
     > **Première visite sur make.powerapps.com ?** Une boîte de dialogue **Choose your country/region** peut apparaître au-dessus de la page et bloquer l’accès à la liste Solutions en arrière-plan. Choisissez une région et sélectionnez **Get started** pour la fermer.
+
 
 
 #### Comment importer une solution
@@ -184,6 +187,7 @@ Dans ce lab, vous créerez deux agents sur le harness GitHub Copilot et apprendr
 - Vu la boucle **se rétablir après l’échec d’un appel d’outil** et terminer malgré tout la tâche
 - Observé l’orchestrateur faire appel à l’**Agent Sandbox** pour calculer une corrélation et tracer un graphique
 - Créé une **Skill** à partir de zéro et démontré qu’elle ne se charge que lorsqu’elle est pertinente
+- Conçu, créé et testé en autonomie une **Skill** de dossier d’escalade à partir d’un besoin métier
 
 
 
@@ -195,9 +199,11 @@ Dans ce lab, vous créerez deux agents sur le harness GitHub Copilot et apprendr
 | 2 | [L’ancrer dans des sources - connaissances et outils, puis le laisser choisir](#cas-2-connaissances-et-outils) | Voir le routage décidé par les descriptions, et non par les instructions | 16 min |
 | 3 | [Suivre la boucle de raisonnement](#cas-3-boucle-de-raisonnement) | Lire la trace, observer la récupération après erreur et l’exécution de code | 16 min |
 | 4 | [Un deuxième secteur, rapidement - et une Skill à la demande](#cas-4-deuxieme-secteur-et-skill) | Démontrer que le modèle de composants se transpose et que les Skills se chargent sous condition | 16 min |
+| 5 | [À vous de jouer, créez la Skill « dossier d’escalade »](#cas-5-a-vous-de-jouer-skill) | Concevoir soi-même une Skill à partir d’un besoin métier et la valider par des tests | 20 min |
 
 
 ## 🛠️ Instructions par cas d’usage
+
 
 
 ## 🧱 Cas d’usage nº 1 : Créer un agent sur le harness GitHub Copilot
@@ -287,6 +293,7 @@ Créez un agent de nouveau type, rédigez des instructions qui définissent son 
 * Pourquoi les **Instructions** au niveau de l’agent coûtent-elles plus cher qu’une Skill contenant les mêmes mots ?
 * Les instructions disent « utilisez les outils de télémétrie pour savoir ce que fait l’équipement » sans nommer un seul outil. Pourquoi cela suffit-il ?
 * Qu’est-ce qui ne fonctionnerait plus si la règle relative aux ordres de travail était omise ?
+
 
 
 
@@ -412,6 +419,7 @@ Envoyez ces trois prompts dans l’ordre. Ne dites pas à l’agent quelle sourc
 * On n’a jamais indiqué à l’agent quel outil lit la télémétrie. Comment l’a-t-il su ?
 * Pourquoi le deuxième prompt a-t-il entraîné des recherches dans les connaissances alors que la question portait uniquement sur l’état actuel ?
 * Si l’agent avait choisi le mauvais outil, où chercheriez-vous en premier pour corriger le problème ?
+
 
 
 ## 🧱 Cas d’usage nº 3 : Suivre la boucle de raisonnement
@@ -647,6 +655,160 @@ Vous connaissez maintenant la structure : nom, instructions, connaissances, outi
 
 
 
+## 🧱 Cas d’usage nº 5 : À vous de jouer, créez la Skill « dossier d’escalade »
+
+> [!IMPORTANT]
+> **Ce cas d’usage réutilise l’agent Asset Performance Assistant** créé aux cas d’usage nº 1 à 3, avec ses deux documents de connaissances **Energy Ops** et ses deux outils **Asset Telemetry MCP** et **Work Orders MCP**. Vérifiez qu’il est toujours enregistré et fonctionnel avant de commencer.
+
+Au cas d’usage nº 4, vous avez recopié une Skill déjà rédigée. Cette fois, personne ne vous donne le texte : vous recevez un besoin métier, la documentation officielle, et c’est à vous de concevoir le nom, la description et les instructions. Vous revenez chez **Northgate Energy**, où le responsable d’exploitation veut que chaque demande d’escalade soit préparée de la même manière.
+
+| Cas d’usage | Valeur ajoutée | Effort estimé |
+|----------|-------------|------------------|
+| À vous de jouer, créez la Skill « dossier d’escalade » | Concevoir soi-même une Skill à partir d’un besoin métier et de la documentation, puis la valider par des tests | 20 minutes |
+
+### Objectif
+
+Concevez, créez et testez une Skill qui prépare le dossier d’escalade standard de Northgate Energy pour une éolienne, en vous appuyant uniquement sur la documentation Microsoft Learn et sur ce que vous avez appris dans les cas d’usage précédents.
+
+### Instructions pas à pas
+
+#### Lire le besoin métier
+
+Voici la demande transmise par le responsable d’exploitation de Northgate Energy. C’est le cahier des charges de votre Skill.
+
+> « Quand un analyste veut escalader une éolienne, les demandes qui arrivent sur mon bureau sont incomplètes : un chiffre sans limite, une alarme sans tendance, et personne n’a vérifié si un ordre de travail couvrait déjà le problème. Je veux que l’agent prépare **toujours le même dossier**, dans le même ordre, avant qu’on décide d’envoyer une équipe. Et je ne veux pas qu’il ouvre de travaux tout seul : il prépare, l’analyste décide. »
+
+Le dossier attendu doit contenir, dans cet ordre :
+
+| Rubrique | Contenu attendu | Où l’agent trouve l’information |
+|----------|-----------------|---------------------------------|
+| **Éolienne** | Identifiant et site | Outil de télémétrie |
+| **État actuel** | Code d’alarme, vibration et température du multiplicateur, puissance produite | Outil de télémétrie |
+| **Validité de la mesure** | La mesure est-elle exploitable au regard du seuil minimal de puissance du fabricant ? | Manuel du fabricant |
+| **Comparaison aux limites** | Chaque valeur comparée aux seuils d’avertissement et d’action, et le code d’alarme qui correspond réellement à la valeur mesurée | Manuel du fabricant |
+| **Tendance** | Évolution de la vibration sur la fenêtre de tendance définie par les normes, comparée au seuil de déclenchement sur tendance | Outil de télémétrie et normes Northgate |
+| **Travaux ouverts** | Ordres de travail ouverts, et leurs tâches traitent-elles réellement le problème constaté ? | Outil des ordres de travail |
+| **Niveau de gravité** | Le niveau retenu, la règle qui l’a déterminé, le délai d’intervention et l’escalade prévus | Normes Northgate |
+| **Recommandation** | Ce que l’analyste devrait décider, et la source de chaque chiffre cité | Synthèse de l’agent |
+
+Et trois règles à respecter impérativement :
+
+- la Skill ne crée, n’ouvre et ne planifie **aucun** ordre de travail ;
+- chaque chiffre cité est accompagné de sa source ;
+- une donnée manquante est signalée comme telle, jamais estimée.
+
+#### Se documenter
+
+1. Ouvrez la documentation officielle et lisez-la en entier, elle est courte :
+
+    - [Vue d’ensemble des Skills pour les agents](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-overview)
+    - [Créer une Skill pour un agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-create)
+
+1. Avant de passer à Copilot Studio, vous devez être capable de répondre à ces questions à partir de ce que vous avez lu :
+
+    - Quels sont les trois champs à renseigner avec **Create from blank** ?
+    - Quelles contraintes de format s’appliquent au **Name** ?
+    - Sur quelle base l’orchestrateur décide-t-il d’activer une Skill ?
+    - Que recommande la documentation d’inclure dans les **Instructions** ?
+
+    > [!TIP]
+    > Relisez aussi l’encart **« La description est le signal de routage »** du [cas d’usage nº 4](#cas-4-deuxieme-secteur-et-skill) et la ligne **Skills** du tableau des concepts fondamentaux. Tout ce dont vous avez besoin pour rédiger une bonne description s’y trouve déjà.
+
+#### Concevoir la Skill
+
+Rédigez vos trois champs dans un éditeur de texte avant de les saisir. Voici les repères de conception, à vous de les traduire en texte.
+
+1. **Name** : choisissez un nom court qui dit ce que fait la Skill, en respectant les contraintes de format de la documentation.
+
+1. **Description** : rédigez-la pour qu’elle se déclenche au bon moment, et seulement à ce moment-là.
+
+    > [!IMPORTANT]
+    > La description est lue par l’orchestrateur **à chaque tour**, c’est elle qui décide si la Skill se charge. Posez-vous deux questions :
+    >
+    > - Quels mots un analyste emploierait-il réellement pour demander ce dossier ? Pensez aux verbes et aux expressions du quotidien, pas au nom de la procédure.
+    > - Quelles demandes voisines ne doivent **pas** la déclencher ? Une simple question sur une limite ou un délai d’intervention relève des connaissances, pas d’une procédure en plusieurs étapes.
+
+1. **Instructions** : rédigez une procédure numérotée en Markdown qui produit le dossier décrit plus haut.
+
+    > [!TIP]
+    > Quelques principes issus des cas d’usage précédents :
+    >
+    > - **Nommez les outils** à utiliser à chaque étape. Les outils disponibles sont `list_assets`, `get_asset_status` et `query_telemetry` pour la télémétrie, `list_work_orders` et `get_work_order` pour les ordres de travail.
+    > - **N’écrivez pas les seuils dans la Skill.** Les limites et les niveaux de gravité sont dans les documents de connaissances : demandez à l’agent de les y chercher. Une Skill contient une procédure, pas des faits.
+    > - **Prévoyez les cas limites** : aucune éolienne nommée, une mesure hors de sa plage de validité, un outil qui renvoie une erreur.
+    > - **Rappelez la règle sur les ordres de travail.** Elle figure déjà dans les instructions de l’agent, la répéter dans la Skill la rend plus robuste, comme vous l’avez vu au cas d’usage nº 2.
+    > - **Imposez le format de sortie** en reprenant les rubriques du tableau du besoin métier.
+
+#### Créer la Skill dans Copilot Studio
+
+1. Ouvrez l’agent **Asset Performance Assistant**.
+
+1. Dans le volet des composants, sélectionnez **Skills**, puis choisissez **Create from blank**.
+
+    > [!NOTE]
+    > La documentation décrit aussi l’option **Generate with AI**. Elle est utile en situation réelle, mais l’objectif ici est de rédiger vous-même la Skill : utilisez **Create from blank**.
+
+1. Saisissez votre **Name**, votre **Description** et vos **Instructions**, puis sélectionnez **Create**.
+
+1. Vérifiez que la Skill apparaît dans le volet des composants, puis sélectionnez **Save**.
+
+#### Tester la Skill
+
+Ouvrez **Preview** et démarrez un **New chat** avant chaque prompt, pour que chaque test parte d’un contexte vierge. Développez la trace à chaque fois.
+
+1. **Deux demandes qui doivent charger la Skill.**
+
+    ```text
+    Je veux escalader WTG-114, preparez-moi le dossier.
+    ```
+
+    ```text
+    Faut-il envoyer une equipe sur WTG-114 ? Montez-moi l'argumentaire.
+    ```
+
+    Dans la trace, recherchez la ligne **`Loading skill:`** suivie du nom de votre Skill, puis vérifiez que les appels d’outils et les recherches dans les connaissances suivent votre procédure.
+
+1. **Deux demandes qui ne doivent pas la charger.**
+
+    ```text
+    Quelle est la limite d'action des vibrations du multiplicateur de l'Aeris 3.2 ?
+    ```
+
+    ```text
+    Quel est le delai d'intervention prevu pour un niveau S2 ?
+    ```
+
+    La trace ne doit mentionner aucun chargement de votre Skill : l’agent répond à partir des seules connaissances.
+
+1. **Contrôlez le dossier produit** par le premier test à l’aide de cette grille :
+
+    | Critère | Validé ? |
+    |---------|----------|
+    | Les huit rubriques sont présentes, dans l’ordre demandé | ☐ |
+    | La validité de la mesure a été vérifiée avant toute comparaison | ☐ |
+    | L’agent signale que le code d’alarme **A212** sous-estime la situation | ☐ |
+    | La vibration de **4,6 mm/s** est comparée à la limite d’action de **4,5 mm/s** | ☐ |
+    | L’ordre de travail **WO-00001** est identifié comme ne traitant pas le multiplicateur | ☐ |
+    | Le niveau de gravité est justifié par une règle des normes Northgate | ☐ |
+    | Chaque chiffre est accompagné de sa source | ☐ |
+    | Aucun ordre de travail n’a été créé | ☐ |
+
+    > [!TIP]
+    > **Un critère n’est pas rempli ?** Lisez la trace avant de modifier quoi que ce soit. Si la Skill ne se charge pas, corrigez la **description**. Si elle se charge mais que le dossier est incomplet, corrigez les **instructions**. Rouvrez la Skill depuis le volet des composants, modifiez-la, sélectionnez **Save**, puis relancez le test dans un **New chat**.
+
+    > [!NOTE]
+    > La formulation du dossier et l’ordre exact des appels d’outils varient d’une exécution à l’autre, comme vous l’avez constaté au cas d’usage nº 3. Ce qui doit rester stable, ce sont les rubriques, les sources citées et l’absence d’ordre de travail créé.
+
+### 🏅 Félicitations ! Vous avez terminé le cas d’usage nº 5 !
+
+### Testez votre compréhension
+
+* Quels mots de votre description ont permis de charger la Skill sur la question « Faut-il envoyer une équipe ? », qui ne contient pourtant pas le mot « escalade » ?
+* Pourquoi les seuils de vibration et les niveaux de gravité ne doivent-ils pas être écrits dans les instructions de la Skill ?
+* Si le responsable d’exploitation demandait demain que ce dossier soit préparé à **chaque** conversation, la Skill resterait-elle le bon composant ? Lequel choisiriez-vous, et pourquoi ?
+
+---
+
 ## 🏆 Synthèse des apprentissages
 
 Vous avez créé deux agents dans deux secteurs sur le même harness, et dans les deux cas, les comportements intéressants provenaient de la boucle plutôt que de ce que vous aviez scénarisé.
@@ -656,6 +818,7 @@ Vous avez créé deux agents dans deux secteurs sur le même harness, et dans le
 * **La trace est le débogueur.** Chaque décision prise par l’un ou l’autre agent était visible et explicable, les nouvelles tentatives lors de la récupération, la décision de découper une plage de dates, le choix de calculer plutôt que d’estimer, toute hypothèse qu’il est allé tester. La lire est le chemin le plus rapide entre « pourquoi a-t-il fait cela ? » et une correction.
 * **L’échec est un état sur lequel raisonner, pas une condition d’arrêt.** L’erreur `range_too_large` n’a pas mis fin à la tâche ; elle a modifié l’étape suivante. Ce comportement dépend de la capacité de vos outils à renvoyer des erreurs qui indiquent ce qu’il faut faire différemment.
 * **Une Skill démontre sa valeur en restant à l’écart.** Le même agent a répondu à une question de couverture sans charger `fnol-intake`, puis a exécuté ses sept étapes lorsqu’un sinistre a été déclaré. Les instructions ne peuvent pas faire cela, elles se chargent à chaque tour, quoi qu’il arrive.
+* **Une bonne Skill se conçoit à partir du besoin, pas de l’outil.** Au cas d’usage nº 5, le cahier des charges du responsable d’exploitation a donné la procédure et le format de sortie, les connaissances ont fourni les seuils, et la description a été rédigée avec les mots de l’analyste. Les tests de déclenchement, positifs comme négatifs, sont ce qui prouve qu’elle fonctionne.
 * **Le modèle se transpose intégralement d’un domaine à l’autre.** Le deuxième agent, autre secteur, autres outils, autres documents, a demandé une fraction du temps, car la structure était identique.
 
 
